@@ -45,6 +45,13 @@ from llm_guard.vault import Vault
             {"BanSubstrings": False},
             True,
         ),  # prompt contains words that can't be used and fail fast
+        (
+            [BanSubstrings(substrings=["none"]), TokenLimit()],
+            None,
+            None,
+            {},
+            False,
+        ),  # None prompt returns early without crashing
     ],
 )
 def test_scan_prompt(evaluators, prompt, expected_sanitized_prompt, expected_results, fail_fast):

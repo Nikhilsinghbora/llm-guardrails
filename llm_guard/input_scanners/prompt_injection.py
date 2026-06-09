@@ -13,6 +13,7 @@ from llm_guard.util import (
     split_text_by_sentences,
     split_text_to_word_chunks,
     truncate_tokens_head_tail,
+    validate_threshold,
 )
 
 from .base import Scanner
@@ -148,6 +149,7 @@ class PromptInjection(Scanner):
         if isinstance(match_type, str):
             match_type = MatchType(match_type)
 
+        validate_threshold(threshold)
         self._threshold = threshold
         self._model = model
 

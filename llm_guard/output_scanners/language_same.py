@@ -3,7 +3,7 @@ from __future__ import annotations
 from llm_guard.input_scanners.language import DEFAULT_MODEL
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer_and_model_for_classification, pipeline
-from llm_guard.util import get_logger
+from llm_guard.util import get_logger, validate_threshold
 
 from .base import Scanner
 
@@ -31,6 +31,7 @@ class LanguageSame(Scanner):
             use_onnx (bool): Whether to use ONNX for inference. Default is False.
         """
 
+        validate_threshold(threshold)
         self._threshold = threshold
 
         if model is None:

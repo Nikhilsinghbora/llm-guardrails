@@ -7,7 +7,7 @@ from presidio_anonymizer.core.text_replace_builder import TextReplaceBuilder
 
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer_and_model_for_ner
-from llm_guard.util import get_logger, lazy_load_dep, split_text_to_word_chunks
+from llm_guard.util import get_logger, lazy_load_dep, split_text_to_word_chunks, validate_threshold
 
 from .base import Scanner
 
@@ -60,6 +60,7 @@ class BanCompetitors(Scanner):
             model = MODEL_V1
 
         self._competitors = competitors
+        validate_threshold(threshold)
         self._threshold = threshold
         self._redact = redact
         self.chunk_length = chunk_size

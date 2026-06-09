@@ -42,7 +42,7 @@ def scan_prompt(
     results_valid = {}
     results_score = {}
 
-    if len(scanners) == 0 or prompt.strip() == "":
+    if len(scanners) == 0 or prompt is None or prompt.strip() == "":
         return sanitized_prompt, results_valid, results_score
 
     start_time = time.time()

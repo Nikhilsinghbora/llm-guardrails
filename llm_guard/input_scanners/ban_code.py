@@ -4,7 +4,7 @@ import re
 
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer_and_model_for_classification, pipeline
-from llm_guard.util import calculate_risk_score, get_logger, remove_markdown
+from llm_guard.util import calculate_risk_score, get_logger, remove_markdown, validate_threshold
 
 from .base import Scanner
 
@@ -56,6 +56,7 @@ class BanCode(Scanner):
            use_onnx (bool): Whether to use ONNX instead of PyTorch for inference.
         """
 
+        validate_threshold(threshold)
         self._threshold = threshold
         if model is None:
             model = MODEL_SM

@@ -15,7 +15,7 @@ from llm_guard.input_scanners.anonymize_helpers import (
     get_transformers_recognizer,
 )
 from llm_guard.input_scanners.anonymize_helpers.ner_mapping import NERConfig
-from llm_guard.util import calculate_risk_score, get_logger
+from llm_guard.util import calculate_risk_score, get_logger, validate_threshold
 
 from ..input_scanners.anonymize_helpers.regex_patterns import (
     DefaultRegexPatterns,
@@ -72,6 +72,7 @@ class Sensitive(Scanner):
 
         self._entity_types = entity_types
         self._redact = redact
+        validate_threshold(threshold)
         self._threshold = threshold
 
         if not recognizer_conf:

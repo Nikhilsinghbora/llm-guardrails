@@ -4,7 +4,7 @@ from enum import Enum
 
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer_and_model_for_classification, pipeline
-from llm_guard.util import calculate_risk_score, get_logger, split_text_by_sentences
+from llm_guard.util import calculate_risk_score, get_logger, split_text_by_sentences, validate_threshold
 
 from .base import Scanner
 
@@ -75,6 +75,7 @@ class Toxicity(Scanner):
         if isinstance(match_type, str):
             match_type = MatchType(match_type)
 
+        validate_threshold(threshold)
         self._threshold = threshold
         self._match_type = match_type
 

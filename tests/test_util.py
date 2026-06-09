@@ -8,7 +8,38 @@ from llm_guard.util import (
     split_text_by_sentences,
     split_text_to_word_chunks,
     truncate_tokens_head_tail,
+    validate_threshold,
 )
+
+
+@pytest.mark.parametrize(
+    "value, kwargs",
+    [
+        (0.0, {}),
+        (0.5, {}),
+        (1.0, {}),
+        (0.75, {"name": "minimum_score"}),
+        (-0.3, {"min_val": -1.0}),
+        (0.0, {"min_val": -1.0}),
+        (1.0, {"min_val": -1.0}),
+    ],
+)
+def test_validate_threshold_accepts_valid_values(value, kwargs):
+    validate_threshold(value, **kwargs)
+
+
+@pytest.mark.parametrize(
+    "value, kwargs",
+    [
+        (-0.1, {}),
+        (1.1, {}),
+        (-2.0, {"min_val": -1.0}),
+        (1.5, {"min_val": -1.0}),
+    ],
+)
+def test_validate_threshold_rejects_invalid_values(value, kwargs):
+    with pytest.raises(ValueError):
+        validate_threshold(value, **kwargs)
 
 
 @pytest.mark.parametrize(

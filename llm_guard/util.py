@@ -131,6 +131,11 @@ def lazy_load_dep(import_name: str, package_name: str | None = None):
     return importlib.import_module(import_name)
 
 
+def validate_threshold(value: float, name: str = "threshold", min_val: float = 0.0, max_val: float = 1.0) -> None:
+    if not (min_val <= value <= max_val):
+        raise ValueError(f"{name} must be between {min_val} and {max_val}, got {value}")
+
+
 def calculate_risk_score(score: float, threshold: float) -> float:
     """
     Calculate the risk score based on the threshold. The risk score is a value between -1 and 1.

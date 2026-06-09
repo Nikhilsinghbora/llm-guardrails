@@ -1,4 +1,4 @@
-from llm_guard.util import calculate_risk_score, get_logger, lazy_load_dep
+from llm_guard.util import calculate_risk_score, get_logger, lazy_load_dep, validate_threshold
 
 from .base import Scanner
 
@@ -29,6 +29,7 @@ class Sentiment(Scanner):
 
         sentiment = lazy_load_dep("nltk.sentiment", "nltk")
         self._sentiment_analyzer = sentiment.SentimentIntensityAnalyzer()
+        validate_threshold(threshold, min_val=-1.0)
         self._threshold = threshold
 
     def scan(self, prompt: str) -> tuple[str, bool, float]:

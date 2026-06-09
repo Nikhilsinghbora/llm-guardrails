@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from llm_guard.input_scanners.ban_topics import MODEL_DEBERTA_BASE_V2
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer_and_model_for_classification
-from llm_guard.util import calculate_risk_score, device, get_logger, lazy_load_dep
+from llm_guard.util import calculate_risk_score, device, get_logger, lazy_load_dep, validate_threshold
 
 from .base import Scanner
 
@@ -40,6 +40,7 @@ class FactualConsistency(Scanner):
             use_onnx (bool): Whether to use the ONNX version of the model. Defaults to False.
         """
 
+        validate_threshold(minimum_score, "minimum_score")
         self._minimum_score = minimum_score
 
         if model is None:

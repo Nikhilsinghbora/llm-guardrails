@@ -7,7 +7,7 @@ import torch
 
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer, is_onnx_supported
-from llm_guard.util import calculate_risk_score, device, get_logger, lazy_load_dep
+from llm_guard.util import calculate_risk_score, device, get_logger, lazy_load_dep, validate_threshold
 
 from .base import Scanner
 
@@ -66,6 +66,7 @@ class Relevance(Scanner):
             use_onnx: Whether to use the ONNX version of the model. Defaults to False.
         """
 
+        validate_threshold(threshold)
         self._threshold = threshold
 
         if model is None:

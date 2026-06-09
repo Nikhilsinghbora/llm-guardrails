@@ -10,7 +10,7 @@ from presidio_anonymizer.core.text_replace_builder import TextReplaceBuilder
 from llm_guard.input_scanners.anonymize_helpers.ner_mapping import NERConfig
 
 from ..exception import LLMGuardValidationError
-from ..util import calculate_risk_score, get_logger
+from ..util import calculate_risk_score, get_logger, validate_threshold
 from ..vault import Vault
 from .anonymize_helpers import (
     DEBERTA_AI4PRIVACY_v2_CONF,
@@ -107,6 +107,7 @@ class Anonymize(Scanner):
         self._allowed_names = allowed_names
         self._preamble = preamble
         self._use_faker = use_faker
+        validate_threshold(threshold)
         self._threshold = threshold
         self._language = language
 

@@ -5,7 +5,7 @@ import re
 from llm_guard.exception import LLMGuardValidationError
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer_and_model_for_classification, pipeline
-from llm_guard.util import calculate_risk_score, get_logger
+from llm_guard.util import calculate_risk_score, get_logger, validate_threshold
 
 from .base import Scanner
 
@@ -90,6 +90,7 @@ class Code(Scanner):
 
         self._languages = languages
         self._is_blocked = is_blocked
+        validate_threshold(threshold)
         self._threshold = threshold
 
         if model is None:
