@@ -41,6 +41,9 @@ class URLReachability(Scanner):
             return False
 
     def scan(self, prompt: str, output: str) -> tuple[str, bool, float]:
+        if output is None or output.strip() == "":
+            return output, True, -1.0
+
         urls = extract_urls(output)
         if not urls:
             return output, True, -1.0

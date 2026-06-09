@@ -139,6 +139,9 @@ class EmotionDetection(Scanner):
         )
 
     def scan(self, prompt: str) -> tuple[str, bool, float]:
+        if prompt.strip() == "":
+            return prompt, True, -1.0
+
         if self._return_full_output:
             sanitized_prompt, is_valid, risk_score, emotion_analysis = self.scan_with_full_output(
                 prompt
@@ -146,9 +149,6 @@ class EmotionDetection(Scanner):
             # Store the emotion analysis for later access if needed
             self._last_emotion_analysis = emotion_analysis
             return sanitized_prompt, is_valid, risk_score
-
-        if prompt.strip() == "":
-            return prompt, True, -1.0
 
         inputs = self._match_type.get_inputs(prompt)
 

@@ -77,6 +77,9 @@ class BanCompetitors(Scanner):
         )
 
     def scan(self, prompt: str) -> tuple[str, bool, float]:
+        if prompt.strip() == "":
+            return prompt, True, -1.0
+
         is_detected = False
         text_replace_builder = TextReplaceBuilder(original_text=prompt)
         entities = self._get_ner_results_for_text(prompt)

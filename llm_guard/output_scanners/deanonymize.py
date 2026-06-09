@@ -139,6 +139,9 @@ class Deanonymize(Scanner):
         if isinstance(matching_strategy, str):
             matching_strategy = MatchingStrategy(matching_strategy)
 
+        if matching_strategy in (MatchingStrategy.FUZZY, MatchingStrategy.COMBINED_EXACT_FUZZY):
+            lazy_load_dep("fuzzysearch")
+
         self._vault = vault
         self._matching_strategy = matching_strategy
 

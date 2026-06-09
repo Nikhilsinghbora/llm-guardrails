@@ -73,6 +73,9 @@ class Regex(Scanner):
         self._redact = redact
 
     def scan(self, prompt: str) -> tuple[str, bool, float]:
+        if prompt.strip() == "":
+            return prompt, True, -1.0
+
         text_replace_builder = TextReplaceBuilder(original_text=prompt)
         for pattern in self._patterns:
             matches = self._match_type.match(pattern, prompt)

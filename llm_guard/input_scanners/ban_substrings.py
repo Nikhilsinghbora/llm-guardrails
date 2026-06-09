@@ -96,6 +96,9 @@ class BanSubstrings(Scanner):
         return redacted_text
 
     def scan(self, prompt: str) -> tuple[str, bool, float]:
+        if prompt.strip() == "":
+            return prompt, True, -1.0
+
         sanitized_prompt = prompt
         matched_substrings = []
         missing_substrings = []

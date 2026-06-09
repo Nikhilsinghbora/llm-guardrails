@@ -83,7 +83,7 @@ class MatchType(Enum):
 
     _tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast
 
-    def set_tokenizer(self, tokenizer):
+    def set_tokenizer(self, tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast) -> None:
         self._tokenizer = tokenizer
 
     def get_inputs(self, prompt: str) -> list[str]:

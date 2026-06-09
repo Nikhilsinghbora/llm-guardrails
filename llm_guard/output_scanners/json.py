@@ -44,7 +44,7 @@ class JSON(Scanner):
         try:
             json.loads(json_str)
             return True
-        except ValueError as e:
+        except json.JSONDecodeError as e:
             LOGGER.warning("Invalid JSON", error=e)
             return False
 
