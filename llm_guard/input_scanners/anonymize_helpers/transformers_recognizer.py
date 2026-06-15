@@ -140,7 +140,7 @@ class TransformersRecognizer(EntityRecognizer):
 
         transformers = cast("transformers", lazy_load_dep("transformers"))
         self.pipeline = transformers.pipelines.pipeline(  # pyright: ignore[reportCallIssue, reportArgumentType]
-            "ner",
+            "ner",  # pyright: ignore[reportArgumentType]
             model=tf_model,
             tokenizer=tf_tokenizer,
             **self.model.pipeline_kwargs,

@@ -22,9 +22,9 @@ class URLReachability(Scanner):
         """
         if success_status_codes is None:
             success_status_codes = [
-                int(requests.codes.ok),
-                int(requests.codes.created),
-                int(requests.codes.accepted),
+                requests.codes.ok,  # pyright: ignore[reportArgumentType]
+                requests.codes.created,  # pyright: ignore[reportArgumentType]
+                requests.codes.accepted,  # pyright: ignore[reportArgumentType]
             ]
 
         self._success_status_codes = success_status_codes
