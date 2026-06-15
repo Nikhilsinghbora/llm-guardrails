@@ -318,6 +318,54 @@ def test_scan_unknown():
         assert str(e) == f"Language must be in the list of allowed: {ALL_SUPPORTED_LANGUAGES}"
 
 
+# ── fix #337: language parameter is respected (unit, no model load) ───────────
+
+def test_language_fix_english_only_loads_english_model(monkeypatch):
+    """When language='en', get_analyzer must receive ['en'], NOT ['en', 'zh']."""
+    import llm_guard.input_scanners.anonymize as mod
+
+    captured = {}
+
+    def fake_get_analyzer(recognizer, regex_groups, custom_names, supported_languages):
+        captured["supported_languages"] = list(supported_languages)
+        raise RuntimeError("short-circuit")  # stop before model load
+
+    monkeypatch.setattr(mod, "get_analyzer", fake_get_analyzer)
+
+    try:
+        Anonymize(Vault(), language="en")
+    except RuntimeError:
+        pass
+
+    assert captured["supported_languages"] == ["en"], (
+        f"Expected ['en'] but got {captured['supported_languages']!r}. "
+        "The language fix should not include unused languages."
+    )
+
+
+def test_language_fix_chinese_only_loads_chinese_model(monkeypatch):
+    """When language='zh', get_analyzer must receive ['zh'], NOT ['en', 'zh']."""
+    import llm_guard.input_scanners.anonymize as mod
+
+    captured = {}
+
+    def fake_get_analyzer(recognizer, regex_groups, custom_names, supported_languages):
+        captured["supported_languages"] = list(supported_languages)
+        raise RuntimeError("short-circuit")
+
+    monkeypatch.setattr(mod, "get_analyzer", fake_get_analyzer)
+
+    try:
+        Anonymize(Vault(), language="zh")
+    except RuntimeError:
+        pass
+
+    assert captured["supported_languages"] == ["zh"], (
+        f"Expected ['zh'] but got {captured['supported_languages']!r}. "
+        "The language fix should not load English models for Chinese-only use."
+    )
+
+
 def test_patterns():
     for group in get_regex_patterns():
         name = group["name"]

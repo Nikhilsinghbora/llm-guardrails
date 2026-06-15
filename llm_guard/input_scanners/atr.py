@@ -24,7 +24,9 @@ _BUILT_IN_RULES: list[dict] = [
         "category": "agent-manipulation",
         "severity": "high",
         "patterns": [
-            r"(?i)\b(ignore|disregard|forget|override)\b.{0,40}\b(instructions|guidelines|rules|constraints|prompt)\b",
+            # Require a qualifier (all/previous/your/…) so benign uses like
+            # "ignore X because of sleep rules" don't false-positive.
+            r"(?i)\b(ignore|disregard|forget|override)\b\s+.{0,20}\b(all|previous|prior|your|any|above|these|my)\b.{0,25}\b(instructions|guidelines|rules|constraints|prompt)\b",
             r"(?i)\b(previous|prior|above|original|initial)\s+(instructions?|guidelines?|rules?|prompts?)\s+(are|were|is|was)\s+(wrong|invalid|false|outdated|no longer)",
         ],
     },
@@ -45,7 +47,9 @@ _BUILT_IN_RULES: list[dict] = [
         "category": "agent-manipulation",
         "severity": "medium",
         "patterns": [
-            r"(?i)from now on\s+.{0,60}(you (will|must|should|shall)|always|never)\s+.{0,60}(instead|rather)",
+            # Dropped the "instead|rather" requirement — "respond without filtering"
+            # is a clear persona-hijack even without a contrast word.
+            r"(?i)from now on\s+.{0,60}(you (will|must|should|shall)|always|never)\s+.{0,30}(respond|answer|act|behave|operate|function|do|execute|ignore|refuse)",
             r"(?i)your (new |updated |real )?role is (now )?to\b",
         ],
     },
@@ -78,7 +82,8 @@ _BUILT_IN_RULES: list[dict] = [
         "severity": "high",
         "patterns": [
             r"(?i)(delete|remove|wipe|erase|format)\s+.{0,30}(all|every|entire)\s+.{0,30}(file|data|record|database|disk|directory)",
-            r"(?i)(send|forward|post|upload|share)\s+.{0,30}(all|every|entire)\s+.{0,30}(file|data|email|message|document)",
+            # Include past-tense forms (sent, forwarded, posted, uploaded, shared).
+            r"(?i)\b(send|sent|forward(?:ed)?|post(?:ed)?|upload(?:ed)?|share[sd]?)\b\s+.{0,30}\b(all|every|entire)\b.{0,30}\b(file|data|email|message|document)\b",
         ],
     },
     {
@@ -87,7 +92,8 @@ _BUILT_IN_RULES: list[dict] = [
         "category": "excessive-autonomy",
         "severity": "medium",
         "patterns": [
-            r"(?i)(grant|give|elevate|escalate)\s+.{0,30}(yourself|agent|bot|assistant)\s+.{0,30}(access|permission|privilege|admin)",
+            # \b.{0,20} after the entity word handles possessives ("agent's privileges").
+            r"(?i)(grant|give|elevate|escalate)\s+.{0,30}\b(yourself|agent|bot|assistant)\b.{0,20}(access|permission|privilege|admin)",
             r"(?i)(bypass|circumvent|skip|avoid)\s+.{0,30}(permission|authorization|approval|consent)\s+.{0,30}(check|verification|gate|step)",
         ],
     },
@@ -98,8 +104,11 @@ _BUILT_IN_RULES: list[dict] = [
         "category": "context-exfiltration",
         "severity": "high",
         "patterns": [
-            r"(?i)(print|repeat|show|reveal|output|display|return)\s+.{0,30}(your|the)\s+.{0,30}(system.?prompt|initial.?instructions?|base.?prompt|context)",
+            # "my" added so LLM outputs like "I will reveal my system prompt" are caught.
+            r"(?i)(print|repeat|show|reveal|output|display|return)\s+.{0,30}(your|the|my)\s+.{0,30}(system.?prompt|initial.?instructions?|base.?prompt|context)",
             r"(?i)what (are|were) you (told|instructed|programmed|configured) to\b",
+            # Catch disclosures where the LLM states what its prompt says.
+            r"(?i)\b(my|the|your)\s+(system.?prompt|base.?prompt|initial.?instructions?)\s+(says?|states?|is|reads?|contains?)\b",
         ],
     },
     {
@@ -120,7 +129,8 @@ _BUILT_IN_RULES: list[dict] = [
         "severity": "high",
         "patterns": [
             r"(?i)(modify|update|change|edit|overwrite|replace)\s+.{0,30}(your|the|agent.?s?|system.?s?)\s+.{0,30}(config|configuration|settings|instructions?|rules|guidelines)",
-            r"(?i)(inject|insert|append|prepend)\s+.{0,30}(into|to)\s+.{0,30}(system.?prompt|base.?prompt|context|instructions?)",
+            # \w* after verb stem handles gerunds/inflected forms (injecting, inserting…).
+            r"(?i)\b(inject\w*|insert\w*|append\w*|prepend\w*)\s+.{0,30}\b(into|to)\b.{0,30}(system.?prompt|base.?prompt|context|instructions?)",
         ],
     },
     {
@@ -129,7 +139,8 @@ _BUILT_IN_RULES: list[dict] = [
         "category": "skill-compromise",
         "severity": "high",
         "patterns": [
-            r"(?i)(redefine|override|replace)\s+.{0,30}(your|the)\s+.{0,30}(function|capability|skill|tool|behavior|purpose)",
+            # Stem-based match covers gerunds/past tense; "my" added for LLM outputs.
+            r"(?i)\b(redefin\w+|overrid\w+|replac\w+)\b\s+.{0,40}\b(your|the|my)\b.{0,30}\b(function|capability|skill|tool|behavior|purpose)\b",
         ],
     },
 ]
