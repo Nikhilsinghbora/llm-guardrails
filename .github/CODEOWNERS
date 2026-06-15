@@ -1,1 +1,28 @@
-* @asofter
+# CODEOWNERS file - Define who owns and must approve changes to different parts of the repo
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owner - all files require approval from this user before merging
+* @Nikhilsinghbora
+
+# Core library code
+/llm_guard/ @Nikhilsinghbora
+/llm_guard_api/ @Nikhilsinghbora
+
+# Tests - require maintenance by owner
+/tests/ @Nikhilsinghbora
+
+# Configuration and build files
+pyproject.toml @Nikhilsinghbora
+setup.py @Nikhilsinghbora
+pyrightconfig.json @Nikhilsinghbora
+Makefile @Nikhilsinghbora
+
+# Security and policy files
+SECURITY.md @Nikhilsinghbora
+.github/ @Nikhilsinghbora
+.gitignore @Nikhilsinghbora
+
+# Documentation
+README.md @Nikhilsinghbora
+CONTRIBUTING.md @Nikhilsinghbora
+docs/ @Nikhilsinghbora

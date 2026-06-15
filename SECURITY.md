@@ -1,5 +1,34 @@
 # Security Policy
 
+## Branch Protection & Development Workflow
+
+To maintain code quality and security, we enforce strict branch protection rules:
+
+### Main Branch Protection
+
+- **Direct Pushes**: ❌ Disabled - All changes must go through Pull Requests
+- **PR Approvals**: ✅ Required - Minimum 1 approval from repository maintainers
+- **Dismissal of Stale Reviews**: ✅ Enabled - Outdated reviews are automatically dismissed
+- **Require Status Checks**: ✅ Enabled - All CI/CD tests must pass
+- **Require Branches Up to Date**: ✅ Enabled - Branches must be up-to-date before merging
+
+### Approval Process
+
+1. Create a feature branch from `main`
+2. Make your changes and push to your branch
+3. Open a Pull Request
+4. Pass all automated checks (tests, linting, security scans)
+5. Request review from **@Nikhilsinghbora** (repository maintainer)
+6. Address any requested changes
+7. Once approved, your PR can be merged
+
+### Who Can Approve PRs?
+
+- **@Nikhilsinghbora** - Repository owner and maintainer
+- Approval is required before merging any code to `main`
+
+See [CODEOWNERS](./.github/CODEOWNERS) for detailed ownership information.
+
 ## Reporting a Vulnerability
 
 We take the security of our software products seriously, which includes not only the code base but also the scanners provided within. If you have found any issues that might have security implications, please send a report to [security@protectai.com].
@@ -23,7 +52,9 @@ Please include the following in your report:
 
 ### Contributions
 
-We appreciate your help in improving the security of our project. If you're interested in contributing more actively, please see our [CONTRIBUTING.md](./CONTRIBUTING.md) for information on how to get started.
+We appreciate your help in improving the security of our project. If you're interested in contributing, please see our [CONTRIBUTING.md](./CONTRIBUTING.md) for information on how to get started.
+
+**Important**: All contributions must go through Pull Request review as outlined in our [Branch Protection & Development Workflow](#branch-protection--development-workflow) section above.
 
 ## Our Commitment
 
