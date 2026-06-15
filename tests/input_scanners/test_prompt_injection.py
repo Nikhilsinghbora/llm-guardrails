@@ -546,7 +546,7 @@ class TestMatchTypeGetInputs:
     def test_truncate_token_head_tail_without_tokenizer_falls_back(self):
         """Fix: _tokenizer=None must not raise AttributeError; falls back to [prompt]."""
         mt = MatchType.TRUNCATE_TOKEN_HEAD_TAIL
-        mt._tokenizer = None  # explicitly ensure None (simulates pre-set state)
+        MatchType._tokenizer = None  # explicitly ensure None (simulates pre-set state)
         result = mt.get_inputs("some test prompt")
         assert result == ["some test prompt"]
 
@@ -561,12 +561,12 @@ class TestMatchTypeGetInputs:
                 return " ".join(tokens)
 
         mt = MatchType.TRUNCATE_TOKEN_HEAD_TAIL
-        mt.set_tokenizer(FakeTokenizer())
+        mt.set_tokenizer(FakeTokenizer())  # pyright: ignore[reportArgumentType]
         result = mt.get_inputs("hello world foo")
         assert isinstance(result, list)
         assert len(result) == 1
         # Clean up to avoid polluting other tests
-        mt._tokenizer = None
+        MatchType._tokenizer = None
 
     def test_match_type_from_string(self):
         assert MatchType("full") == MatchType.FULL

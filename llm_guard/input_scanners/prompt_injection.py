@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from enum import Enum
+from typing import ClassVar
 
 from transformers.tokenization_utils import PreTrainedTokenizer
 from transformers.tokenization_utils_fast import PreTrainedTokenizerFast
@@ -82,10 +83,10 @@ class MatchType(Enum):
     TRUNCATE_HEAD_TAIL = "truncate_head_tail"
     CHUNKS = "chunks"
 
-    _tokenizer = None  # PreTrainedTokenizer | PreTrainedTokenizerFast | None
+    _tokenizer: ClassVar[PreTrainedTokenizer | PreTrainedTokenizerFast | None] = None  # pyright: ignore[reportGeneralTypeIssues]
 
     def set_tokenizer(self, tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast) -> None:
-        self._tokenizer = tokenizer
+        MatchType._tokenizer = tokenizer
 
     def get_inputs(self, prompt: str) -> list[str]:
         if self == MatchType.SENTENCE:

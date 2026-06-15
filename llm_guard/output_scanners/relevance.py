@@ -44,7 +44,7 @@ MODEL_EN_BGE_SMALL = Model(
 
 
 if TYPE_CHECKING:
-    import optimum.onnxruntime
+    import optimum.onnxruntime  # pyright: ignore[reportMissingImports]
 
 
 class Relevance(Scanner):
