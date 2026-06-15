@@ -1,10 +1,8 @@
-# LLM Guard - Enhanced Security Toolkit for LLM Interactions
+# LLM Guard Rails - Comprehensive Security Toolkit for LLM Interactions
 
-> **Note:** This is an enhanced fork of the original [LLM Guard](https://github.com/protectai/llm-guard) project by [Protect AI](https://protectai.com/llm-guard). It builds upon the excellent security toolkit foundation with additional customizations and enhancements.
+LLM Guard Rails is a comprehensive security toolkit designed to fortify the safety and security of Large Language Model (LLM) interactions. It provides robust protection against various attack vectors and malicious inputs.
 
-LLM Guard is a comprehensive tool designed to fortify the security of Large Language Models (LLMs). This enhanced version includes additional features and improvements tailored for advanced security use cases.
-
-[**Original Documentation**](https://protectai.github.io/llm-guard/) | [**Playground**](https://huggingface.co/spaces/ProtectAI/llm-guard-playground) | [**Original Project**](https://github.com/protectai/llm-guard)
+[**Documentation**](https://github.com/Nikhilsinghbora/llm-guardrails) | [**Playground**](https://huggingface.co/spaces/ProtectAI/llm-guard-playground) | [**Getting Started**](./docs/get_started/quickstart.md)
 
 [![GitHub
 stars](https://img.shields.io/github/stars/protectai/llm-guard.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/protectai/llm-guard/stargazers/)
