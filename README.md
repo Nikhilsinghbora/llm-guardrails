@@ -1,8 +1,10 @@
-# LLM Guard - The Security Toolkit for LLM Interactions
+# LLM Guard - Enhanced Security Toolkit for LLM Interactions
 
-LLM Guard by [Protect AI](https://protectai.com/llm-guard) is a comprehensive tool designed to fortify the security of Large Language Models (LLMs).
+> **Note:** This is an enhanced fork of the original [LLM Guard](https://github.com/protectai/llm-guard) project by [Protect AI](https://protectai.com/llm-guard). It builds upon the excellent security toolkit foundation with additional customizations and enhancements.
 
-[**Documentation**](https://protectai.github.io/llm-guard/) | [**Playground**](https://huggingface.co/spaces/ProtectAI/llm-guard-playground) | [**Changelog**](https://protectai.github.io/llm-guard/changelog/)
+LLM Guard is a comprehensive tool designed to fortify the security of Large Language Models (LLMs). This enhanced version includes additional features and improvements tailored for advanced security use cases.
+
+[**Original Documentation**](https://protectai.github.io/llm-guard/) | [**Playground**](https://huggingface.co/spaces/ProtectAI/llm-guard-playground) | [**Original Project**](https://github.com/protectai/llm-guard)
 
 [![GitHub
 stars](https://img.shields.io/github/stars/protectai/llm-guard.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/protectai/llm-guard/stargazers/)
