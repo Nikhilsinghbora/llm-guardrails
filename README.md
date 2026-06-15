@@ -25,21 +25,31 @@ injection attacks, LLM-Guard ensures that your interactions with LLMs remain saf
 
 ## Installation
 
-Begin your journey with LLM Guard by downloading the package:
+Begin your journey with LLM Guard Rails by downloading the package:
 
 ```sh
+# Coming soon to PyPI as llm-guardrails
 pip install llm-guard
+```
+
+Or install from source:
+
+```sh
+git clone https://github.com/Nikhilsinghbora/llm-guardrails.git
+cd llm-guardrails
+pip install -e .
 ```
 
 ## Getting Started
 
 **Important Notes**:
 
-- LLM Guard is designed for easy integration and deployment in production environments. While it's ready to use
+- LLM Guard Rails is designed for easy integration and deployment in production environments. While it's ready to use
   out-of-the-box, please be informed that we're constantly improving and updating the repository.
 - Base functionality requires a limited number of libraries. As you explore more advanced features, necessary libraries
   will be automatically installed.
-- Ensure you're using Python version 3.9 or higher. Confirm with: `python --version`.
+- Ensure you're using Python version 3.10 or higher. Confirm with: `python --version`.
+- We fully support Python 3.10, 3.11, 3.12, 3.13, and 3.14.
 - Library installation issues? Consider upgrading pip: `python -m pip install --upgrade pip`.
 
 **Examples**:
@@ -52,6 +62,7 @@ pip install llm-guard
 ### Prompt scanners
 
 - [Anonymize](https://protectai.github.io/llm-guard/input_scanners/anonymize/)
+- [ATRScanner](./docs/input_scanners/atr.md) ⭐ **NEW**
 - [BanCode](./docs/input_scanners/ban_code.md)
 - [BanCompetitors](https://protectai.github.io/llm-guard/input_scanners/ban_competitors/)
 - [BanSubstrings](https://protectai.github.io/llm-guard/input_scanners/ban_substrings/)
@@ -69,6 +80,7 @@ pip install llm-guard
 
 ### Output scanners
 
+- [ATRScanner](./docs/output_scanners/atr.md) ⭐ **NEW**
 - [BanCode](./docs/output_scanners/ban_code.md)
 - [BanCompetitors](https://protectai.github.io/llm-guard/output_scanners/ban_competitors/)
 - [BanSubstrings](https://protectai.github.io/llm-guard/output_scanners/ban_substrings/)
@@ -103,6 +115,22 @@ we would love to have you as part of our community.
 - **Active Development**: We maintain and release updates more frequently than the original project
 - **Feature Requests Welcome**: We actively review and implement community feature requests
 - **Responsive Maintenance**: Issues and PRs receive timely reviews and updates
+
+### Recent Improvements & Updates
+
+**Security & Bug Fixes:**
+- ✅ Fixed CVE-2026-26007: Updated `presidio-anonymizer` to ≥2.2.362
+- ✅ Fixed critical transformers vulnerability (GHSA-phhr-52qp-3mj4)
+- ✅ Fixed Anonymize scanner to properly respect language parameter (#337)
+- ✅ Fixed PromptInjection tokenizer initialization bug (#331)
+- ✅ Fixed MaliciousURLs missing top_k parameter TypeError (#318)
+
+**New Features & Enhancements:**
+- ✅ **Python 3.13+ Support**: Full compatibility with Python 3.13 and 3.14
+- ✅ **ATRScanner**: New Agent Threat Rule scanner with 10+ built-in detection patterns
+- ✅ **ThresholdMixin**: Dynamically adjust scanner sensitivity without model reloading
+- ✅ **Model.from_local()**: Factory method for locally-downloaded HuggingFace models
+- ✅ Improved dependency management for better compatibility
 
 ### Get Involved
 
