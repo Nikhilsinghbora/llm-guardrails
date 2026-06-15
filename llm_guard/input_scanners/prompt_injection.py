@@ -5,6 +5,7 @@ from enum import Enum
 from transformers.tokenization_utils import PreTrainedTokenizer
 from transformers.tokenization_utils_fast import PreTrainedTokenizerFast
 
+from llm_guard.mixins import ThresholdMixin
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer_and_model_for_classification, pipeline
 from llm_guard.util import (
@@ -15,8 +16,6 @@ from llm_guard.util import (
     truncate_tokens_head_tail,
     validate_threshold,
 )
-
-from llm_guard.mixins import ThresholdMixin
 
 from .base import Scanner
 
@@ -83,7 +82,7 @@ class MatchType(Enum):
     TRUNCATE_HEAD_TAIL = "truncate_head_tail"
     CHUNKS = "chunks"
 
-    _tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast | None = None
+    _tokenizer = None  # PreTrainedTokenizer | PreTrainedTokenizerFast | None
 
     def set_tokenizer(self, tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast) -> None:
         self._tokenizer = tokenizer

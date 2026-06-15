@@ -2,12 +2,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
-
 from llm_guard.model import Model
 
-
 # ── from_local: path resolution ────────────────────────────────────────────────
+
 
 def test_from_local_path_object(tmp_path):
     model = Model.from_local(tmp_path)
@@ -48,6 +46,7 @@ def test_from_local_passes_subfolder(tmp_path):
 
 # ── from_local: default field values ───────────────────────────────────────────
 
+
 def test_from_local_default_onnx_path_is_none(tmp_path):
     model = Model.from_local(tmp_path)
     assert model.onnx_path is None
@@ -64,6 +63,7 @@ def test_from_local_default_subfolder_is_empty(tmp_path):
 
 
 # ── __post_init__: default pipeline_kwargs are injected ────────────────────────
+
 
 def test_model_pipeline_kwargs_gets_batch_size(tmp_path):
     model = Model.from_local(tmp_path, pipeline_kwargs={"max_length": 512})
@@ -89,12 +89,14 @@ def test_model_user_pipeline_kwargs_merged_with_defaults(tmp_path):
 
 # ── str representation ─────────────────────────────────────────────────────────
 
+
 def test_model_str_returns_path(tmp_path):
     model = Model.from_local(tmp_path)
     assert str(model) == str(tmp_path.resolve())
 
 
 # ── from_local is equivalent to direct construction ────────────────────────────
+
 
 def test_from_local_equivalent_to_direct_construction(tmp_path):
     resolved = str(tmp_path.resolve())

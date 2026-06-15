@@ -7,7 +7,13 @@ import torch
 
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer, is_onnx_supported
-from llm_guard.util import calculate_risk_score, device, get_logger, lazy_load_dep, validate_threshold
+from llm_guard.util import (
+    calculate_risk_score,
+    device,
+    get_logger,
+    lazy_load_dep,
+    validate_threshold,
+)
 
 from .base import Scanner
 

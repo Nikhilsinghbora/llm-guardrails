@@ -4,8 +4,8 @@ import pytest
 
 from llm_guard.output_scanners.malicious_urls import MaliciousURLs
 
-
 # ── full integration tests (uses real model) ───────────────────────────────────
+
 
 @pytest.mark.parametrize(
     "output,expected_valid,expected_score",
@@ -57,6 +57,7 @@ def test_output_with_whitespace_only_is_valid():
 
 
 # ── fix #318: top_k auto-injection (unit, no model load) ─────────────────────
+
 
 def test_top_k_injected_when_absent_from_pipeline_kwargs(monkeypatch):
     """When a custom model omits top_k, MaliciousURLs must inject top_k=None

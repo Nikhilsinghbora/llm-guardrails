@@ -320,6 +320,7 @@ def test_scan_unknown():
 
 # ── fix #337: language parameter is respected (unit, no model load) ───────────
 
+
 def test_language_fix_english_only_loads_english_model(monkeypatch):
     """When language='en', get_analyzer must receive ['en'], NOT ['en', 'zh']."""
     import llm_guard.input_scanners.anonymize as mod

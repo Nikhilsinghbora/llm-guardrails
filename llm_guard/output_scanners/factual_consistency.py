@@ -1,11 +1,17 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING, Any, cast
 
 from llm_guard.input_scanners.ban_topics import MODEL_DEBERTA_BASE_V2
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer_and_model_for_classification
-from llm_guard.util import calculate_risk_score, device, get_logger, lazy_load_dep, validate_threshold
+from llm_guard.util import (
+    calculate_risk_score,
+    device,
+    get_logger,
+    lazy_load_dep,
+    validate_threshold,
+)
 
 from .base import Scanner
 
@@ -14,7 +20,7 @@ LOGGER = get_logger()
 if TYPE_CHECKING:
     import torch
 
-torch = cast("torch", lazy_load_dep("torch"))
+torch = cast(Any, lazy_load_dep("torch"))
 
 
 class FactualConsistency(Scanner):

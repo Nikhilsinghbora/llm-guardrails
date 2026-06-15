@@ -22,6 +22,7 @@ class _FakeScanner(ThresholdMixin):
 
 # ── getter ─────────────────────────────────────────────────────────────────────
 
+
 def test_threshold_getter_returns_init_value():
     assert _FakeScanner(threshold=0.7).threshold == 0.7
 
@@ -35,6 +36,7 @@ def test_threshold_getter_high():
 
 
 # ── setter – valid values ───────────────────────────────────────────────────────
+
 
 @pytest.mark.parametrize("new_val", [0.0, 0.1, 0.5, 0.75, 0.99, 1.0])
 def test_threshold_setter_valid(new_val):
@@ -58,6 +60,7 @@ def test_threshold_setter_same_value_idempotent():
 
 # ── setter – invalid values ─────────────────────────────────────────────────────
 
+
 @pytest.mark.parametrize("bad_val", [1.0001, 1.1, 2.0, 100.0])
 def test_threshold_setter_above_one_raises(bad_val):
     s = _FakeScanner()
@@ -79,6 +82,7 @@ def test_threshold_setter_nan_raises():
 
 
 # ── behavioural: scan respects the updated threshold ───────────────────────────
+
 
 def test_scan_changes_after_threshold_update():
     """Raising threshold makes the scanner less strict."""
@@ -107,6 +111,7 @@ def test_scan_catches_more_after_lowering_threshold():
 
 
 # ── multiple instances are independent ─────────────────────────────────────────
+
 
 def test_instances_have_independent_thresholds():
     s1 = _FakeScanner(threshold=0.2)

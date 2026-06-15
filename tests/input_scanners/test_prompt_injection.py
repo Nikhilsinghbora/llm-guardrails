@@ -505,6 +505,7 @@ def test_scan(
 # These test the fix where _tokenizer defaulted to no value and raised
 # AttributeError instead of safely returning [prompt].
 
+
 class TestMatchTypeGetInputs:
     def test_full_returns_prompt_as_single_item(self):
         result = MatchType.FULL.get_inputs("hello world")
@@ -551,6 +552,7 @@ class TestMatchTypeGetInputs:
 
     def test_truncate_token_head_tail_with_tokenizer_uses_it(self):
         """When a tokenizer IS set, TRUNCATE_TOKEN_HEAD_TAIL must use it."""
+
         class FakeTokenizer:
             def tokenize(self, text):
                 return text.split()
