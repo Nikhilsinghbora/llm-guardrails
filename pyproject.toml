@@ -38,10 +38,10 @@ dependencies = [
 
 [project.optional-dependencies]
 onnxruntime = [
-  "optimum[onnxruntime]>=1.26.0,<2",
+  "optimum[onnxruntime]>=1.26.0,<3",
 ]
 onnxruntime-gpu = [
-  "optimum[onnxruntime-gpu]>=1.26.0,<2",
+  "optimum[onnxruntime-gpu]>=1.26.0,<3",
 ]
 docs-dev = [
   "mkdocs>=1.6,<2",
