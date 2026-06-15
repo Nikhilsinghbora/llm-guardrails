@@ -1,8 +1,10 @@
 # LLM Guard Rails - Comprehensive Security Toolkit for LLM Interactions
 
-LLM Guard Rails is a comprehensive security toolkit designed to fortify the safety and security of Large Language Model (LLM) interactions. It provides robust protection against various attack vectors and malicious inputs.
+> **About**: This is an actively maintained fork of the original [LLM Guard](https://github.com/protectai/llm-guard) project by [Protect AI](https://protectai.com/llm-guard). We maintain enhancements and improvements beyond the original project, ensuring continuous updates and feature development.
 
-[**Documentation**](https://github.com/Nikhilsinghbora/llm-guardrails) | [**Playground**](https://huggingface.co/spaces/ProtectAI/llm-guard-playground) | [**Getting Started**](./docs/get_started/quickstart.md)
+LLM Guard Rails is a comprehensive security toolkit designed to fortify the safety and security of Large Language Model (LLM) interactions. It provides robust protection against various attack vectors and malicious inputs with actively maintained enhancements.
+
+[**Documentation**](https://github.com/Nikhilsinghbora/llm-guardrails) | [**Original Project**](https://github.com/protectai/llm-guard) | [**Getting Started**](./docs/get_started/quickstart.md)
 
 [![GitHub
 stars](https://img.shields.io/github/stars/protectai/llm-guard.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/protectai/llm-guard/stargazers/)
@@ -91,27 +93,30 @@ pip install llm-guard
 
 ## Community, Contributing, Docs & Support
 
-LLM Guard is an open source solution.
+LLM Guard Rails is an open source solution maintained as an active fork of the original LLM Guard project.
 We are committed to a transparent development process and highly appreciate any contributions.
 Whether you are helping us fix bugs, propose new features, improve our documentation or spread the word,
 we would love to have you as part of our community.
 
+### How We Differ
+
+- **Active Development**: We maintain and release updates more frequently than the original project
+- **Feature Requests Welcome**: We actively review and implement community feature requests
+- **Responsive Maintenance**: Issues and PRs receive timely reviews and updates
+
+### Get Involved
+
 - Give us a ⭐️ github star ⭐️ on the top of this page to support what we're doing,
   it means a lot for open source projects!
 - Read our
-  [docs](https://protectai.github.io/llm-guard/)
-  for more info about how to use and customize LLM Guard, and for step-by-step tutorials.
-- Post a [Github
-  Issue](https://github.com/protectai/llm-guard/issues) to submit a bug report, feature request, or suggest an improvement.
+  [docs](./docs/index.md)
+  for more info about how to use and customize LLM Guard Rails, and for step-by-step tutorials.
+- Post a [Github Issue](https://github.com/Nikhilsinghbora/llm-guardrails/issues) to submit a bug report, feature request, or suggest an improvement.
 - To contribute to the package, check out our [contribution guidelines](CONTRIBUTING.md), and open a PR.
 
-Join our Slack to give us feedback, connect with the maintainers and fellow users, ask questions,
-get help for package usage or contributions, or engage in discussions about LLM security!
+### Support & Contact
 
-<a href="https://mlsecops.com/slack"><img src="https://github.com/protectai/llm-guard/blob/main/docs/assets/join-our-slack-community.png?raw=true" width="200" alt="Join Our Slack Community"></a>
+We're eager to provide personalized assistance and discuss feature requests or improvements.
 
-### Production Support
-
-We're eager to provide personalized assistance when deploying your LLM Guard to a production environment.
-
-- [Send Email ✉️](mailto:community@protectai.com)
+- [Send Email ✉️](mailto:nikhilsinghbora17@gmail.com) - Open to feature requests, improvements, and collaboration
+- [GitHub Issues](https://github.com/Nikhilsinghbora/llm-guardrails/issues) - Report bugs or request features
