@@ -21,13 +21,11 @@ class URLReachability(Scanner):
             timeout: The timeout in seconds for the HTTP requests.
         """
         if success_status_codes is None:
-            success_status_codes = [
-                requests.codes.ok,  # pyright: ignore[reportArgumentType]
-                requests.codes.created,  # pyright: ignore[reportArgumentType]
-                requests.codes.accepted,  # pyright: ignore[reportArgumentType]
-            ]
+            # 200 OK, 201 Created, 202 Accepted. Use literals instead of
+            # requests.codes.* whose stubs type them as int | None.
+            success_status_codes = [200, 201, 202]
 
-        self._success_status_codes = success_status_codes
+        self._success_status_codes: list[int] = success_status_codes
         self._timeout = timeout
 
     def is_reachable(self, url: str) -> bool:
