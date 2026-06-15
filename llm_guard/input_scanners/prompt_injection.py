@@ -5,6 +5,7 @@ from enum import Enum
 from transformers.tokenization_utils import PreTrainedTokenizer
 from transformers.tokenization_utils_fast import PreTrainedTokenizerFast
 
+from llm_guard.mixins import ThresholdMixin
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer_and_model_for_classification, pipeline
 from llm_guard.util import (
@@ -16,13 +17,16 @@ from llm_guard.util import (
     validate_threshold,
 )
 
-from llm_guard.mixins import ThresholdMixin
-
 from .base import Scanner
 
 LOGGER = get_logger()
 
 PROMPT_CHARACTERS_LIMIT = 256
+
+# Module-level storage for the tokenizer used by MatchType.TRUNCATE_TOKEN_HEAD_TAIL.
+# Kept outside the Enum body so Python 3.13's stricter Enum.__setattr__ doesn't
+# raise "cannot reassign member" when the scanner updates it at runtime.
+_match_type_tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast | None = None
 
 # This model is proprietary but open source.
 V1_MODEL = Model(
@@ -83,10 +87,9 @@ class MatchType(Enum):
     TRUNCATE_HEAD_TAIL = "truncate_head_tail"
     CHUNKS = "chunks"
 
-    _tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast | None = None
-
     def set_tokenizer(self, tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast) -> None:
-        self._tokenizer = tokenizer
+        global _match_type_tokenizer
+        _match_type_tokenizer = tokenizer
 
     def get_inputs(self, prompt: str) -> list[str]:
         if self == MatchType.SENTENCE:
@@ -101,11 +104,13 @@ class MatchType(Enum):
 
             return chunks
 
-        if self == MatchType.TRUNCATE_TOKEN_HEAD_TAIL and self._tokenizer is not None:
-            tokenized_input = self._tokenizer.tokenize(prompt)
+        if self == MatchType.TRUNCATE_TOKEN_HEAD_TAIL and _match_type_tokenizer is not None:
+            tokenized_input = _match_type_tokenizer.tokenize(prompt)
 
             return [
-                self._tokenizer.convert_tokens_to_string(truncate_tokens_head_tail(tokenized_input))
+                _match_type_tokenizer.convert_tokens_to_string(
+                    truncate_tokens_head_tail(tokenized_input)
+                )
             ]
 
         if self == MatchType.TRUNCATE_HEAD_TAIL and len(prompt) > PROMPT_CHARACTERS_LIMIT:

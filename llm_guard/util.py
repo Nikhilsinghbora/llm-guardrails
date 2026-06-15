@@ -131,7 +131,9 @@ def lazy_load_dep(import_name: str, package_name: str | None = None):
     return importlib.import_module(import_name)
 
 
-def validate_threshold(value: float, name: str = "threshold", min_val: float = 0.0, max_val: float = 1.0) -> None:
+def validate_threshold(
+    value: float, name: str = "threshold", min_val: float = 0.0, max_val: float = 1.0
+) -> None:
     if not (min_val <= value <= max_val):
         raise ValueError(f"{name} must be between {min_val} and {max_val}, got {value}")
 
@@ -230,7 +232,7 @@ def remove_markdown(text):
     clean_text = text
     for pattern in patterns:
         # Use substitution to preserve the text inside ** and *
-        if "([^\*]+)" in pattern:
+        if r"([^\*]+)" in pattern:
             clean_text = re.sub(pattern, r"\1", clean_text)
         else:
             clean_text = re.sub(pattern, "", clean_text)

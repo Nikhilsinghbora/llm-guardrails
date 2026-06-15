@@ -102,20 +102,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install build twine
-      
+
       - name: Build package
         run: python -m build
-      
+
       - name: Publish to PyPI
         run: twine upload dist/*
         env:

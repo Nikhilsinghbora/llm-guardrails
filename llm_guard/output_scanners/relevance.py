@@ -7,7 +7,13 @@ import torch
 
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer, is_onnx_supported
-from llm_guard.util import calculate_risk_score, device, get_logger, lazy_load_dep, validate_threshold
+from llm_guard.util import (
+    calculate_risk_score,
+    device,
+    get_logger,
+    lazy_load_dep,
+    validate_threshold,
+)
 
 from .base import Scanner
 
@@ -38,7 +44,7 @@ MODEL_EN_BGE_SMALL = Model(
 
 
 if TYPE_CHECKING:
-    import optimum.onnxruntime
+    import optimum.onnxruntime  # pyright: ignore[reportMissingImports]
 
 
 class Relevance(Scanner):
@@ -97,7 +103,7 @@ class Relevance(Scanner):
                 export=False,
                 subfolder=model.onnx_subfolder,
                 file_name=model.onnx_filename,
-                revision=model.onnx_revision,
+                revision=model.onnx_revision,  # pyright: ignore[reportArgumentType]
                 provider=(
                     "CUDAExecutionProvider" if device().type == "cuda" else "CPUExecutionProvider"
                 ),

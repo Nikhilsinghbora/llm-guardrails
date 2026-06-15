@@ -25,6 +25,10 @@ jobs:
   test:
     strategy:
       fail-fast: true
+      # Serialize matrix jobs: all 4 share one HF_TOKEN, so running them
+      # concurrently multiplies the request rate against HuggingFace's
+      # per-account limit and triggers 429s. One at a time stays under it.
+      max-parallel: 1
       matrix:
         python-version: ["3.10", "3.11", "3.12", "3.13"]
 
@@ -63,6 +67,6 @@ jobs:
 
       - name: Test with pytest
         env:
-          HF_HUB_DISABLE_CACHE: 1   # prevents cache from filling up runner disk
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}   # authenticated HF requests avoid 429 rate limits
         run: |
           python -m pytest --exitfirst --verbose --failed-first --cov=. --color=yes --code-highlight=yes

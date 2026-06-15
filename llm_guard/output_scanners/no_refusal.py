@@ -4,7 +4,12 @@ from enum import Enum
 
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer_and_model_for_classification, pipeline
-from llm_guard.util import calculate_risk_score, get_logger, split_text_by_sentences, validate_threshold
+from llm_guard.util import (
+    calculate_risk_score,
+    get_logger,
+    split_text_by_sentences,
+    validate_threshold,
+)
 
 from .ban_substrings import BanSubstrings, MatchType as BanSubstringsMatchType
 from .base import Scanner

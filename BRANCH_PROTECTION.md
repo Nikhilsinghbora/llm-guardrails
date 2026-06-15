@@ -27,8 +27,8 @@ Branch protection rules enforce:
 
 #### Require a pull request before merging
 - ✅ Check: "Require a pull request before merging"
-- ✅ Check: "Require approvals" 
-  - Set to `1` (at least 1 approval required)
+- ✅ Check: "Require approvals"
+    - Set to `1` (at least 1 approval required)
 - ✅ Check: "Dismiss stale pull request approvals when new commits are pushed"
 - ✅ Check: "Require approval of the most recent reviewers before merging"
 
@@ -36,9 +36,9 @@ Branch protection rules enforce:
 - ✅ Check: "Require branches to be up to date before merging"
 - ✅ Check: "Require status checks to pass before merging"
 - Select these status checks:
-  - `Test (Python 3.10)` (if you have CI/CD)
-  - `Test (Python 3.11)` (if applicable)
-  - `Lint` (if you have linting)
+    - `Test (Python 3.10)` (if you have CI/CD)
+    - `Test (Python 3.11)` (if applicable)
+    - `Lint` (if you have linting)
 
 #### Rules for administrators
 - ☐ Uncheck: "Allow force pushes" (prevent accidental data loss)

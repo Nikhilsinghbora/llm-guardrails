@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import pytest
 
+import llm_guard.input_scanners.prompt_injection as _pi_mod
 from llm_guard.input_scanners.prompt_injection import (
     PROMPT_CHARACTERS_LIMIT,
     MatchType,
@@ -505,6 +506,7 @@ def test_scan(
 # These test the fix where _tokenizer defaulted to no value and raised
 # AttributeError instead of safely returning [prompt].
 
+
 class TestMatchTypeGetInputs:
     def test_full_returns_prompt_as_single_item(self):
         result = MatchType.FULL.get_inputs("hello world")
@@ -545,12 +547,13 @@ class TestMatchTypeGetInputs:
     def test_truncate_token_head_tail_without_tokenizer_falls_back(self):
         """Fix: _tokenizer=None must not raise AttributeError; falls back to [prompt]."""
         mt = MatchType.TRUNCATE_TOKEN_HEAD_TAIL
-        mt._tokenizer = None  # explicitly ensure None (simulates pre-set state)
+        _pi_mod._match_type_tokenizer = None  # explicitly ensure None (simulates pre-set state)
         result = mt.get_inputs("some test prompt")
         assert result == ["some test prompt"]
 
     def test_truncate_token_head_tail_with_tokenizer_uses_it(self):
         """When a tokenizer IS set, TRUNCATE_TOKEN_HEAD_TAIL must use it."""
+
         class FakeTokenizer:
             def tokenize(self, text):
                 return text.split()
@@ -559,12 +562,12 @@ class TestMatchTypeGetInputs:
                 return " ".join(tokens)
 
         mt = MatchType.TRUNCATE_TOKEN_HEAD_TAIL
-        mt.set_tokenizer(FakeTokenizer())
+        mt.set_tokenizer(FakeTokenizer())  # pyright: ignore[reportArgumentType]
         result = mt.get_inputs("hello world foo")
         assert isinstance(result, list)
         assert len(result) == 1
         # Clean up to avoid polluting other tests
-        mt._tokenizer = None
+        _pi_mod._match_type_tokenizer = None
 
     def test_match_type_from_string(self):
         assert MatchType("full") == MatchType.FULL
