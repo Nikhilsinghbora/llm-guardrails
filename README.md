@@ -4,15 +4,14 @@
 
 LLM Guard Rails is a comprehensive security toolkit designed to fortify the safety and security of Large Language Model (LLM) interactions. It provides robust protection against various attack vectors and malicious inputs with actively maintained enhancements.
 
-[**Documentation**](https://github.com/Nikhilsinghbora/llm-guardrails) | [**Original Project**](https://github.com/protectai/llm-guard) | [**Getting Started**](./docs/get_started/quickstart.md)
+[**Documentation**](https://github.com/Nikhilsinghbora/llm-guardrails) | [**PyPI Package**](https://pypi.org/project/llm-guardrails-maintained/) | [**Original Project**](https://github.com/protectai/llm-guard) | [**Getting Started**](./docs/get_started/quickstart.md)
 
-[![GitHub
-stars](https://img.shields.io/github/stars/protectai/llm-guard.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/protectai/llm-guard/stargazers/)
+[![GitHub stars](https://img.shields.io/github/stars/protectai/llm-guard.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/protectai/llm-guard/stargazers/)
 [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![PyPI - Python Version](https://img.shields.io/pypi/v/llm-guard)](https://pypi.org/project/llm-guard)
-[![Downloads](https://static.pepy.tech/badge/llm-guard)](https://pepy.tech/project/llm-guard)
-[![Downloads](https://static.pepy.tech/badge/llm-guard/month)](https://pepy.tech/project/llm-guard)
+[![PyPI version](https://img.shields.io/pypi/v/llm-guardrails-maintained.svg)](https://pypi.org/project/llm-guardrails-maintained/)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://www.python.org/downloads/)
+[![Downloads](https://static.pepy.tech/badge/llm-guardrails-maintained)](https://pepy.tech/project/llm-guardrails-maintained)
 
 <a href="https://mlsecops.com/slack"><img src="https://github.com/protectai/llm-guard/blob/main/docs/assets/join-our-slack-community.png?raw=true" width="200" alt="Join Our Slack Community"></a>
 
@@ -41,20 +40,19 @@ pip install -e .
 
 ## Getting Started
 
-**Important Notes**:
+**Requirements & Notes**:
 
-- LLM Guard Rails is designed for easy integration and deployment in production environments. While it's ready to use
-  out-of-the-box, please be informed that we're constantly improving and updating the repository.
-- Base functionality requires a limited number of libraries. As you explore more advanced features, necessary libraries
-  will be automatically installed.
-- Ensure you're using Python version 3.10 or higher. Confirm with: `python --version`.
-- We fully support Python 3.10, 3.11, 3.12, 3.13, and 3.14.
-- Library installation issues? Consider upgrading pip: `python -m pip install --upgrade pip`.
+- **Python**: 3.10, 3.11, 3.12, 3.13, or 3.14 (`python --version` to verify)
+- **Production-Ready**: Designed for easy integration in production environments with continuous improvements
+- **Minimal Dependencies**: Base functionality requires minimal libraries; advanced features auto-install as needed
+- **Troubleshooting**: If you encounter installation issues, upgrade pip: `python -m pip install --upgrade pip`
 
-**Examples**:
+**Quick Examples**:
 
-- Get started with [ChatGPT and LLM Guard](./examples/openai_api.py).
-- Deploy LLM Guard as [API](https://protectai.github.io/llm-guard/api/overview/)
+- [OpenAI Integration](./examples/openai_api.py) - Secure ChatGPT interactions
+- [LangChain Integration](./examples/langchain.py) - LLM protection with LangChain
+- [API Deployment](https://protectai.github.io/llm-guard/api/overview/) - Deploy as a service
+- [More Examples](./examples/) - Amazon Bedrock, Google Gemini, and streaming examples
 
 ## Supported scanners
 
