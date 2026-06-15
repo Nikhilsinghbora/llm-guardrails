@@ -11,7 +11,6 @@ LLM Guard Rails is a comprehensive security toolkit designed to fortify the safe
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![PyPI version](https://img.shields.io/pypi/v/llm-guardrails-maintained.svg)](https://pypi.org/project/llm-guardrails-maintained/)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://www.python.org/downloads/)
-[![Downloads](https://static.pepy.tech/badge/llm-guardrails-maintained)](https://pepy.tech/project/llm-guardrails-maintained)
 
 
 
