@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from .anonymize import Anonymize
+from .atr import ATRScanner
 from .ban_code import BanCode
 from .ban_competitors import BanCompetitors
 from .ban_substrings import BanSubstrings
@@ -21,6 +22,7 @@ from .util import get_scanner_by_name
 
 __all__ = [
     "Anonymize",
+    "ATRScanner",
     "BanCode",
     "BanCompetitors",
     "BanSubstrings",

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import dataclasses
+from pathlib import Path
 
 from .util import device
 
@@ -38,6 +39,22 @@ class Model:
             "device": device(),
         }
         self.pipeline_kwargs = {**default_pipeline_kwargs, **self.pipeline_kwargs}
+
+    @classmethod
+    def from_local(cls, path: str | Path, **kwargs) -> Model:
+        """
+        Create a Model from a local directory.
+
+        Resolves the path to an absolute string so HuggingFace
+        ``from_pretrained`` can locate it without ambiguity.
+
+        Example::
+
+            model = Model.from_local("/models/my-deberta")
+            scanner = PromptInjection(model=model)
+        """
+        resolved = str(Path(path).resolve())
+        return cls(path=resolved, **kwargs)
 
     def __str__(self):
         return self.path

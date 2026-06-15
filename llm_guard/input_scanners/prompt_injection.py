@@ -16,6 +16,8 @@ from llm_guard.util import (
     validate_threshold,
 )
 
+from llm_guard.mixins import ThresholdMixin
+
 from .base import Scanner
 
 LOGGER = get_logger()
@@ -117,7 +119,7 @@ class MatchType(Enum):
         return [prompt]
 
 
-class PromptInjection(Scanner):
+class PromptInjection(ThresholdMixin, Scanner):
     """
     A prompt injection scanner based on HuggingFace model. It is used to
     detect if a prompt is attempting to perform an injection attack.

@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Python 3.13 added to CI test matrix ([#281](https://github.com/protectai/llm-guard/issues/281), [#319](https://github.com/protectai/llm-guard/issues/319)).
 - `from __future__ import annotations` added to all library modules for Python 3.13 annotation compatibility ([#319](https://github.com/protectai/llm-guard/issues/319)).
+- `ATRScanner` input and output scanners: pattern-based detection of agent attacks (tool-poisoning, excessive-autonomy, skill-compromise, context-exfiltration, agent-manipulation) with optional YAML rule files ([#340](https://github.com/protectai/llm-guard/issues/340)).
+- `ThresholdMixin` in `llm_guard.mixins`: exposes `threshold` as a settable property so callers can tune sensitivity after init without reloading the model ([#154](https://github.com/protectai/llm-guard/issues/154)). Applied to `PromptInjection` and `BanTopics`.
+- `Model.from_local(path, **kwargs)` factory classmethod for loading locally-downloaded HuggingFace models ([#326](https://github.com/protectai/llm-guard/issues/326)).
 
 ### Fixed
 - `Anonymize` scanner always loaded all supported language models regardless of the `language` parameter ([#337](https://github.com/protectai/llm-guard/issues/337)).

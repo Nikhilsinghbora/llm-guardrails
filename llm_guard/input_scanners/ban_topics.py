@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from llm_guard.mixins import ThresholdMixin
 from llm_guard.model import Model
 from llm_guard.transformers_helpers import get_tokenizer_and_model_for_classification, pipeline
 from llm_guard.util import calculate_risk_score, get_logger, validate_threshold
@@ -90,7 +91,7 @@ MODEL_ROBERTA_BASE_C_V2 = Model(
 )
 
 
-class BanTopics(Scanner):
+class BanTopics(ThresholdMixin, Scanner):
     """
     BanTopics class is used to ban certain topics from the prompt.
 

@@ -1,6 +1,7 @@
 """LLM output scanners init"""
 from __future__ import annotations
 
+from .atr import ATRScanner
 from .ban_code import BanCode
 from .ban_competitors import BanCompetitors
 from .ban_substrings import BanSubstrings
@@ -26,6 +27,7 @@ from .url_reachabitlity import URLReachability
 from .util import get_scanner_by_name
 
 __all__ = [
+    "ATRScanner",
     "BanCode",
     "BanCompetitors",
     "BanSubstrings",
