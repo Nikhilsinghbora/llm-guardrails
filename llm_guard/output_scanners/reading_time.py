@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from llm_guard.util import get_logger
 
 from .base import Scanner

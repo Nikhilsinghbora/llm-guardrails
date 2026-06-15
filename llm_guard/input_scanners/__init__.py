@@ -1,4 +1,5 @@
 """Input scanners init"""
+from __future__ import annotations
 
 from .anonymize import Anonymize
 from .ban_code import BanCode

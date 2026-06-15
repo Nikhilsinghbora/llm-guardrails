@@ -63,11 +63,15 @@ class MaliciousURLs(Scanner):
             use_onnx=use_onnx,
         )
 
+        pipeline_kwargs = {**model.pipeline_kwargs}
+        if "top_k" not in pipeline_kwargs:
+            pipeline_kwargs["top_k"] = None
+
         self._classifier = pipeline(
             task="text-classification",
             model=tf_model,
             tokenizer=tf_tokenizer,
-            **model.pipeline_kwargs,
+            **pipeline_kwargs,
         )
 
     def scan(self, prompt: str, output: str) -> tuple[str, bool, float]:

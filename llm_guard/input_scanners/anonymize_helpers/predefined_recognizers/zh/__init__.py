@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from ..phone_recognizer import PhoneRecognizer
 from .crypto_recognizer import CryptoRecognizer
 from .custom_pattern_recognizer import CustomPatternRecognizer

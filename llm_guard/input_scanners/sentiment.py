@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from llm_guard.util import calculate_risk_score, get_logger, lazy_load_dep, validate_threshold
 
 from .base import Scanner

@@ -1,4 +1,5 @@
 """LLM output scanners init"""
+from __future__ import annotations
 
 from .ban_code import BanCode
 from .ban_competitors import BanCompetitors

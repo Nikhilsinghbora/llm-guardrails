@@ -7,14 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - 0.3.17
 
+### Added
+- Python 3.13 added to CI test matrix ([#281](https://github.com/protectai/llm-guard/issues/281), [#319](https://github.com/protectai/llm-guard/issues/319)).
+- `from __future__ import annotations` added to all library modules for Python 3.13 annotation compatibility ([#319](https://github.com/protectai/llm-guard/issues/319)).
+
 ### Fixed
 - `Anonymize` scanner always loaded all supported language models regardless of the `language` parameter ([#337](https://github.com/protectai/llm-guard/issues/337)).
 - `MatchType._tokenizer` in `PromptInjection` had no default value, causing `AttributeError` when `get_inputs()` was called before `set_tokenizer()`.
+- `MaliciousURLs` scanner raised `TypeError` when a custom model omitted `top_k` from `pipeline_kwargs` ([#318](https://github.com/protectai/llm-guard/issues/318)).
 
 ### Changed
 - Bump `presidio-analyzer` and `presidio-anonymizer` to `>=2.2.362` to resolve CVE-2026-26007 via `cryptography>=46.0.5` ([#342](https://github.com/protectai/llm-guard/issues/342)).
 - Bump `transformers` to `>=4.52.1,<5` to address GHSA-phhr-52qp-3mj4 and related CVEs ([#313](https://github.com/protectai/llm-guard/issues/313)).
 - Bump `optimum[onnxruntime]` and `optimum[onnxruntime-gpu]` to `>=1.26.0,<2` for transformers 4.52+ compatibility.
+- Relax `bc-detect-secrets` and `json-repair` from exact pins to minimum-version constraints ([#320](https://github.com/protectai/llm-guard/issues/320)).
 
 ## [0.3.16] - 2025-05-19
 

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from presidio_analyzer import Pattern
 from presidio_analyzer.predefined_recognizers import IpRecognizer as PresidioIpRecognizer
 

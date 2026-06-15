@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from .analyzer import get_analyzer, get_transformers_recognizer
 from .faker import get_fake_value
 from .ner_mapping import *
