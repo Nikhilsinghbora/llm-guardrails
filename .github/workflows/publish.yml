@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write  # Required for PyPI's OIDC trusted publishing
 
     steps:
       - name: Checkout repository
@@ -46,9 +47,9 @@ jobs:
           release_name: Release ${{ github.ref_name }}
           body: |
             Package `llm-guardrails` version ${{ github.ref_name }} has been published to PyPI.
-
+            
             View on PyPI: https://pypi.org/project/llm-guardrails/${{ github.ref_name }}/
-
+            
             Install with: `pip install llm-guardrails==${{ github.ref_name }}`
           draft: false
           prerelease: false
