@@ -28,8 +28,7 @@ injection attacks, LLM-Guard ensures that your interactions with LLMs remain saf
 Begin your journey with LLM Guard Rails by downloading the package:
 
 ```sh
-# Coming soon to PyPI as llm-guardrails
-pip install llm-guard
+pip install llm-guardrails-maintained
 ```
 
 Or install from source:

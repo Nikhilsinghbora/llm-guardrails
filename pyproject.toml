@@ -1,5 +1,5 @@
 [project]
-name = "llm-guardrails"
+name = "llm-guardrails-maintained"
 description = "LLM Guard Rails - An actively maintained security toolkit for Large Language Model interactions. Features advanced sanitization, harmful language detection, data leakage prevention, and prompt injection resistance with continuous improvements and enhancements."
 authors = [
   { name = "Nikhil Singh Bora", email = "nikhilsinghbora17@gmail.com"},

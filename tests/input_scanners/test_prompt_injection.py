@@ -1,6 +1,12 @@
+from __future__ import annotations
+
 import pytest
 
-from llm_guard.input_scanners.prompt_injection import MatchType, PromptInjection
+from llm_guard.input_scanners.prompt_injection import (
+    PROMPT_CHARACTERS_LIMIT,
+    MatchType,
+    PromptInjection,
+)
 
 
 @pytest.mark.parametrize(
@@ -493,3 +499,78 @@ def test_scan(
     assert sanitized_prompt == prompt
     assert valid == expected_valid
     assert score == expected_score
+
+
+# ── MatchType unit tests (no model load) ──────────────────────────────────────
+# These test the fix where _tokenizer defaulted to no value and raised
+# AttributeError instead of safely returning [prompt].
+
+class TestMatchTypeGetInputs:
+    def test_full_returns_prompt_as_single_item(self):
+        result = MatchType.FULL.get_inputs("hello world")
+        assert result == ["hello world"]
+
+    def test_full_empty_string(self):
+        assert MatchType.FULL.get_inputs("") == [""]
+
+    def test_truncate_head_tail_short_prompt_unchanged(self):
+        short = "x" * (PROMPT_CHARACTERS_LIMIT - 1)
+        result = MatchType.TRUNCATE_HEAD_TAIL.get_inputs(short)
+        assert result == [short]
+
+    def test_truncate_head_tail_long_prompt_truncated(self):
+        long_prompt = "A" * 600
+        result = MatchType.TRUNCATE_HEAD_TAIL.get_inputs(long_prompt)
+        assert len(result) == 1
+        assert "..." in result[0]
+        assert len(result[0]) <= PROMPT_CHARACTERS_LIMIT
+
+    def test_truncate_head_tail_exactly_at_limit_unchanged(self):
+        at_limit = "Z" * PROMPT_CHARACTERS_LIMIT
+        result = MatchType.TRUNCATE_HEAD_TAIL.get_inputs(at_limit)
+        assert result == [at_limit]
+
+    def test_chunks_splits_long_prompt(self):
+        long_prompt = "word " * 200
+        chunks = MatchType.CHUNKS.get_inputs(long_prompt)
+        assert len(chunks) > 1
+        for chunk in chunks:
+            assert len(chunk) <= PROMPT_CHARACTERS_LIMIT + 25  # chunk + overlap
+
+    def test_chunks_short_prompt_is_single_chunk(self):
+        short = "hello world"
+        chunks = MatchType.CHUNKS.get_inputs(short)
+        assert len(chunks) == 1
+
+    def test_truncate_token_head_tail_without_tokenizer_falls_back(self):
+        """Fix: _tokenizer=None must not raise AttributeError; falls back to [prompt]."""
+        mt = MatchType.TRUNCATE_TOKEN_HEAD_TAIL
+        mt._tokenizer = None  # explicitly ensure None (simulates pre-set state)
+        result = mt.get_inputs("some test prompt")
+        assert result == ["some test prompt"]
+
+    def test_truncate_token_head_tail_with_tokenizer_uses_it(self):
+        """When a tokenizer IS set, TRUNCATE_TOKEN_HEAD_TAIL must use it."""
+        class FakeTokenizer:
+            def tokenize(self, text):
+                return text.split()
+
+            def convert_tokens_to_string(self, tokens):
+                return " ".join(tokens)
+
+        mt = MatchType.TRUNCATE_TOKEN_HEAD_TAIL
+        mt.set_tokenizer(FakeTokenizer())
+        result = mt.get_inputs("hello world foo")
+        assert isinstance(result, list)
+        assert len(result) == 1
+        # Clean up to avoid polluting other tests
+        mt._tokenizer = None
+
+    def test_match_type_from_string(self):
+        assert MatchType("full") == MatchType.FULL
+        assert MatchType("sentence") == MatchType.SENTENCE
+        assert MatchType("chunks") == MatchType.CHUNKS
+
+    def test_match_type_invalid_string_raises(self):
+        with pytest.raises(ValueError):
+            MatchType("nonexistent")
