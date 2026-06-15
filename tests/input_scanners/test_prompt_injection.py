@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import pytest
 
+import llm_guard.input_scanners.prompt_injection as _pi_mod
 from llm_guard.input_scanners.prompt_injection import (
     PROMPT_CHARACTERS_LIMIT,
     MatchType,
@@ -546,7 +547,7 @@ class TestMatchTypeGetInputs:
     def test_truncate_token_head_tail_without_tokenizer_falls_back(self):
         """Fix: _tokenizer=None must not raise AttributeError; falls back to [prompt]."""
         mt = MatchType.TRUNCATE_TOKEN_HEAD_TAIL
-        MatchType._tokenizer = None  # explicitly ensure None (simulates pre-set state)
+        _pi_mod._match_type_tokenizer = None  # explicitly ensure None (simulates pre-set state)
         result = mt.get_inputs("some test prompt")
         assert result == ["some test prompt"]
 
@@ -566,7 +567,7 @@ class TestMatchTypeGetInputs:
         assert isinstance(result, list)
         assert len(result) == 1
         # Clean up to avoid polluting other tests
-        MatchType._tokenizer = None
+        _pi_mod._match_type_tokenizer = None
 
     def test_match_type_from_string(self):
         assert MatchType("full") == MatchType.FULL

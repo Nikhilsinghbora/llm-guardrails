@@ -22,9 +22,9 @@ class URLReachability(Scanner):
         """
         if success_status_codes is None:
             success_status_codes = [
-                requests.codes.ok,
-                requests.codes.created,
-                requests.codes.accepted,
+                int(requests.codes.ok),
+                int(requests.codes.created),
+                int(requests.codes.accepted),
             ]
 
         self._success_status_codes = success_status_codes

@@ -103,7 +103,7 @@ class Relevance(Scanner):
                 export=False,
                 subfolder=model.onnx_subfolder,
                 file_name=model.onnx_filename,
-                revision=model.onnx_revision,
+                revision=model.onnx_revision,  # pyright: ignore[reportArgumentType]
                 provider=(
                     "CUDAExecutionProvider" if device().type == "cuda" else "CPUExecutionProvider"
                 ),
