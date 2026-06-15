@@ -1,4 +1,5 @@
 """LLM output scanners init"""
+
 from __future__ import annotations
 
 from .atr import ATRScanner

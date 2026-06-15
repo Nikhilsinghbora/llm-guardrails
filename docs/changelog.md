@@ -5,8 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-> **Note**: This is an actively maintained fork of the original [LLM Guard](https://github.com/protectai/llm-guard) project. 
+> **Note**: This is an actively maintained fork of the original [LLM Guard](https://github.com/protectai/llm-guard) project.
 > Version 0.3.17+ includes security patches, bug fixes, and new features beyond the original project.
+
+## [0.3.18] - 2026-06-15
+
+### Added
+- Branch protection rules and PR approval requirements for secure development workflow.
+- CODEOWNERS file for automatic code review routing to maintainers.
+- Comprehensive branch protection setup guide in BRANCH_PROTECTION.md.
+- Updated SECURITY.md with development workflow guidelines.
+- Community links removed from README to highlight independent fork status.
+
+### Changed
+- Updated documentation links to point to local fork documentation instead of original project.
+- README updated to reflect actively maintained fork with PyPI availability.
+- Clarified fork attribution and improvements in README.
 
 ## [0.3.17] - 2026-06-15
 
@@ -425,7 +439,6 @@ _0.3.5 and 0.3.6 were skipped due to build issues._
     - [Sensitive](./output_scanners/sensitive.md)
     - [Toxicity](./output_scanners/toxicity.md)
 
-[Unreleased]: https://github.com/protectai/llm-guard/commits/main
 [0.3.16]: https://github.com/protectai/llm-guard/releases/tag/v0.3.16
 [0.3.15]: https://github.com/protectai/llm-guard/releases/tag/v0.3.15
 [0.3.14]: https://github.com/protectai/llm-guard/releases/tag/v0.3.14
