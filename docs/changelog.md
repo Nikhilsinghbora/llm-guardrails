@@ -5,7 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 0.3.17
+> **Note**: This is an actively maintained fork of the original [LLM Guard](https://github.com/protectai/llm-guard) project. 
+> Version 0.3.17+ includes security patches, bug fixes, and new features beyond the original project.
+
+## [0.3.17] - 2026-06-15
 
 ### Added
 - Python 3.13 added to CI test matrix ([#281](https://github.com/protectai/llm-guard/issues/281), [#319](https://github.com/protectai/llm-guard/issues/319)).

@@ -1,13 +1,14 @@
 [project]
-name = "llm-guard"
-description = "LLM-Guard is a comprehensive tool designed to fortify the security of Large Language Models (LLMs). By offering sanitization, detection of harmful language, prevention of data leakage, and resistance against prompt injection attacks, LLM-Guard ensures that your interactions with LLMs remain safe and secure."
+name = "llm-guardrails"
+description = "LLM Guard Rails - An actively maintained security toolkit for Large Language Model interactions. Features advanced sanitization, harmful language detection, data leakage prevention, and prompt injection resistance with continuous improvements and enhancements."
 authors = [
-  { name = "Protect AI", email = "community@protectai.com"}
+  { name = "Nikhil Singh Bora", email = "nikhilsinghbora17@gmail.com"},
+  { name = "Protect AI (Original)", email = "community@protectai.com"}
 ]
-keywords = ["llm", "language model", "security", "adversarial attacks", "prompt injection", "prompt leakage", "PII detection", "self-hardening", "firewall"]
+keywords = ["llm", "language model", "security", "adversarial attacks", "prompt injection", "prompt leakage", "PII detection", "self-hardening", "firewall", "atr-scanner", "agent-threat-rules"]
 license = { file="LICENSE" }
 readme = "README.md"
-version = "0.3.16"
+version = "0.3.17"
 classifiers = [
   "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
@@ -62,11 +63,13 @@ dev = [
 ]
 
 [project.urls]
-homepage = "https://github.com/protectai/llm-guard"
-documentation = "https://protectai.github.io/llm-guard/"
-repository = "https://github.com/protectai/llm-guard"
-issues = "https://github.com/protectai/llm-guard/issues"
-changelog = "https://protectai.github.io/llm-guard/changelog/"
+homepage = "https://github.com/Nikhilsinghbora/llm-guardrails"
+documentation = "https://github.com/Nikhilsinghbora/llm-guardrails/blob/main/README.md"
+repository = "https://github.com/Nikhilsinghbora/llm-guardrails"
+issues = "https://github.com/Nikhilsinghbora/llm-guardrails/issues"
+changelog = "https://github.com/Nikhilsinghbora/llm-guardrails/blob/main/docs/changelog.md"
+"source" = "https://github.com/Nikhilsinghbora/llm-guardrails"
+"original-project" = "https://github.com/protectai/llm-guard"
 
 [tool.setuptools]
 packages = {find = {where=["."], include=["llm_guard", "llm_guard.*"]}}
