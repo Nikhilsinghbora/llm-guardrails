@@ -81,7 +81,7 @@ class MatchType(Enum):
     TRUNCATE_HEAD_TAIL = "truncate_head_tail"
     CHUNKS = "chunks"
 
-    _tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast
+    _tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast | None = None
 
     def set_tokenizer(self, tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast) -> None:
         self._tokenizer = tokenizer
